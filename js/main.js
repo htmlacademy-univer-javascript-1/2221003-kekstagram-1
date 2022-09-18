@@ -13,6 +13,3 @@ function isRightLength(string, maxLength) {
   }
   return false;
 }
-
-console.log(getRandomNumber(4, 10));
-console.log(isRightLength('Привет', 3));
