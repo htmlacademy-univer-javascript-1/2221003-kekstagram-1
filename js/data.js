@@ -28,5 +28,6 @@ const createPhotoDescription = (id) => ({
 });
 
 const photoDescription = () => Array.from({ length: MAX_COUNT_PHOTOS }).map((element, index) => { element = createPhotoDescription(index + 1); });
+
 export { photoDescription };
 
