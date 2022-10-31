@@ -19,4 +19,3 @@ const createPhotos = (id) => ({
 const getPhotos = () => Array.from({ length: MAX_COUNT_PHOTOS }).map((element, index) => { element = createPhotos(index + 1); });
 
 export { getPhotos };
-
