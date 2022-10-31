@@ -1,5 +1,5 @@
-import { getRandomPositiveInteger, getRandomArrayElement } from './util.js';
-import { NAMES, MESSAGES, DESCRIPTIONS, MAX_COUNT_PHOTOS } from './constants.js';
+import { getRandomPositiveInteger, getRandomArrayElement } from './utils.js';
+import { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS } from './constants.js';
 
 const createComment = (id) => ({
   id,
@@ -16,6 +16,6 @@ const createPhotos = (id) => ({
   comments: Array.from({ length: getRandomPositiveInteger(1, 6) }).map((value, index) => createComment(index + 1)),
 });
 
-const getPhotos = () => Array.from({ length: MAX_COUNT_PHOTOS }).map((element, index) => { element = createPhotos(index + 1); });
+const getPhotos = () => Array.from({ length: MAX_COUNT_PHOTOS }).map((value, index) => createPhotos(index + 1));
 
 export { getPhotos };
