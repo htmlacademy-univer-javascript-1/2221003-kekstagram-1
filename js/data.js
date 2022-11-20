@@ -1,9 +1,9 @@
 import { getRandomPositiveInteger, getRandomArrayElement } from './utils.js';
-import { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike } from './constants.js';
+import { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber } from './constants.js';
 
 const createComment = (id) => ({
   id,
-  avatar: `img/avatar-${getRandomPositiveInteger(1, MAX_COUNT_PHOTOS)}.svg`,
+  avatar: `img/avatar-${getRandomPositiveInteger(AvatarNumber.MIN, AvatarNumber.MAX)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
