@@ -1,3 +1,5 @@
-import { photoDescription } from './data.js';
+import { getPhotos } from './data.js';
+import { createThumbnails } from './thumbnails.js';
 
-photoDescription();
+const photos = getPhotos();
+createThumbnails(photos);
