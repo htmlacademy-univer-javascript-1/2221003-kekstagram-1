@@ -9,4 +9,22 @@ const MESSAGES = ['Всё отлично!',
 ];
 const DESCRIPTIONS = ['Я на пляже', 'Гуляю'];
 
-export { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS };
+const CountLike = {
+  MIN: 15,
+  MAX: 200
+};
+
+const AvatarNumber = {
+  MIN: 1,
+  MAX: 6
+};
+
+const CountComment = {
+  MIN: 0,
+  MAX: 23
+};
+
+const DEFAULT_RENDERED_COMMENTS = 5;
+const STEP_ADDED_COMMENTS = 5;
+
+export { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber, CountComment, DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS };
