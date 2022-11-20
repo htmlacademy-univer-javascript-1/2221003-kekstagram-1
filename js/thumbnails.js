@@ -1,4 +1,7 @@
-const getPictureTemplate = ({ url, comments, likes }) => `<a href="#" class="picture">
+import { openBigPicture } from './big-picture.js';
+import { getPhotos } from './data.js';
+
+const getPictureTemplate = ({ id, url, comments, likes }) => `<a href="#" class="picture js-picture" data-id="${id}">
 <img class="picture__img" src="${url}" width="182" height="182" alt="Случайная фотография">
 <p class="picture__info">
   <span class="picture__comments">${comments.length}</span>
@@ -6,7 +9,24 @@ const getPictureTemplate = ({ url, comments, likes }) => `<a href="#" class="pic
 </p>
 </a>`;
 
+const data = getPhotos();
 const mainContainer = document.querySelector('.js-pictures');
-const createThumbnails = (data) => mainContainer.insertAdjacentHTML('beforeend', data.map((photo) => getPictureTemplate(photo)).join(''));
+const createThumbnails = () => mainContainer.insertAdjacentHTML('beforeend', data.map((photo) => getPictureTemplate(photo)).join(''));
 
-export { createThumbnails };
+const onPictureClick = (evt) => {
+  evt.preventDefault();
+  const target = evt.target;
+  const parent = target.closest('.js-picture');
+  const id = +parent.dataset.id;
+  openBigPicture(data[id - 1]);
+};
+
+const addPictures = () => {
+  createThumbnails();
+  const pictures = document.querySelectorAll('.js-picture');
+  pictures.forEach((picture) => {
+    picture.addEventListener('click', onPictureClick);
+  });
+};
+
+export { addPictures };
