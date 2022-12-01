@@ -1,4 +1,8 @@
+const DEFAULT_RENDERED_COMMENTS = 5;
+const STEP_ADDED_COMMENTS = 5;
+const MAX_COMMENT_LENGTH = 140;
 const MAX_COUNT_PHOTOS = 25;
+
 const NAMES = ['Вадим', 'Марк', 'Мария', 'Ринат', 'Олег', 'Екатерина', 'Наталья', 'Виктор'];
 const MESSAGES = ['Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -24,7 +28,23 @@ const CountComment = {
   MAX: 23
 };
 
-const DEFAULT_RENDERED_COMMENTS = 5;
-const STEP_ADDED_COMMENTS = 5;
+const MaxHashtag = {
+  LENGTH: 20,
+  COUNT: 5
+};
 
-export { MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber, CountComment, DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS };
+const ErrorMessage = {
+  HASH_SPACE: 'Хэш-теги разделяются пробелами',
+  STARTS_WITH_HASH: 'Хэш-тег начинается с символа #',
+  REPEAT_ERROR: 'Хэш-теги не должны повторяться',
+  HASHTAG_MAX_LENTH: `Максимальная длина одного хэш-тега ${MaxHashtag.LENGTH} символов, включая #`,
+  HASHTAG_MAX_COUNT: `Нельзя указать больше ${MaxHashtag.COUNT} хэш-тегов`,
+  UBNORMAL_SYMBOLS: 'Хэш-тег содержит недопустимые символы',
+  MAX_COMM_LENGTH: `Максимальная длина комментария - ${MAX_COMMENT_LENGTH} символов.`,
+  EMPTY_HASHTAG: 'Хэш-тег не может быть пустым',
+};
+
+export {
+  MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber, CountComment,
+  DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS, MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage
+};
