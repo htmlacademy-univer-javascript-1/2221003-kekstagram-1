@@ -1,6 +1,6 @@
 import { onInput, commentHandler, hashtagsHandler, pristine, error } from './validate.js';
 import { changeEffects } from './effects-filter.js';
-import { onClickScaleButtons } from './scale.js';
+import { clickScaleButtons, removeEventScaleButtons } from './scale.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -21,12 +21,14 @@ const closePopup = () => {
 const onButtonEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
     closePopup();
+    removeEventScaleButtons();
     document.removeEventListener('keydown', onButtonEscKeydown);
   }
 };
 
 const onCloseButtonClick = () => {
   closePopup();
+  removeEventScaleButtons();
   document.removeEventListener('keydown', onButtonEscKeydown);
 };
 
@@ -51,7 +53,7 @@ const onImgUploadFieldchange = () => {
   checkFieldInFocus(comments);
   checkFieldInFocus(hashtags);
   changeEffects();
-  onClickScaleButtons();
+  clickScaleButtons();
 };
 
 

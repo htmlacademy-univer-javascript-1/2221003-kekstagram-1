@@ -33,6 +33,12 @@ const MaxHashtag = {
   COUNT: 5
 };
 
+const Scale = {
+  MAX: 100,
+  MIN: 25,
+  STEP: 25
+};
+
 const Effects = {
   'original': {
     name: 'original', filter: '', unit: '',
@@ -74,5 +80,5 @@ const ErrorMessage = {
 export {
   MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber, CountComment,
   DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS, MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage,
-  Effects
+  Effects, Scale
 };
