@@ -12,14 +12,17 @@ const toggleScaleButtons = (difference) => {
   imageSize.value = `${slideValue}%`;
 };
 
-const clickScaleButtons = () => {
-  scaleBiggerButton.addEventListener('click', () => toggleScaleButtons(Scale.STEP));
-  scaleSmallerButton.addEventListener('click', () => toggleScaleButtons(-Scale.STEP));
+const onScaleBiggerButtonClick = () => toggleScaleButtons(Scale.STEP);
+const onScaleSmallerButtonClick = () => toggleScaleButtons(-Scale.STEP);
+
+const addEventScaleButtons = () => {
+  scaleBiggerButton.addEventListener('click', onScaleBiggerButtonClick);
+  scaleSmallerButton.addEventListener('click', onScaleSmallerButtonClick);
 };
 
 const removeEventScaleButtons = () => {
-  scaleBiggerButton.removeEventListener('click', () => toggleScaleButtons(Scale.STEP));
-  scaleSmallerButton.removeEventListener('click', () => toggleScaleButtons(-Scale.STEP));
+  scaleBiggerButton.removeEventListener('click', onScaleBiggerButtonClick);
+  scaleSmallerButton.removeEventListener('click', onScaleSmallerButtonClick);
 };
 
-export { clickScaleButtons, removeEventScaleButtons };
+export { addEventScaleButtons, removeEventScaleButtons };

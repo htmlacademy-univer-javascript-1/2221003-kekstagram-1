@@ -1,5 +1,4 @@
 import { openBigPicture } from './big-picture.js';
-import { getPhotos } from './data.js';
 
 const getPictureTemplate = ({ id, url, comments, likes }) => `<a href="#" class="picture js-picture" data-id="${id}">
 <img class="picture__img" src="${url}" width="182" height="182" alt="Случайная фотография">
@@ -9,7 +8,8 @@ const getPictureTemplate = ({ id, url, comments, likes }) => `<a href="#" class=
 </p>
 </a>`;
 
-const data = getPhotos();
+let data = [];
+
 const mainContainer = document.querySelector('.js-pictures');
 const createThumbnails = () => mainContainer.insertAdjacentHTML('beforeend', data.map((photo) => getPictureTemplate(photo)).join(''));
 
@@ -18,10 +18,12 @@ const onPictureClick = (evt) => {
   const target = evt.target;
   const parent = target.closest('.js-picture');
   const id = +parent.dataset.id;
-  openBigPicture(data[id - 1]);
+  const [photo] = data.filter((item) => item.id === id);
+  openBigPicture(photo);
 };
 
-const addPictures = () => {
+const addPictures = (photos) => {
+  data = photos.slice();
   createThumbnails();
   const pictures = document.querySelectorAll('.js-picture');
   pictures.forEach((picture) => {

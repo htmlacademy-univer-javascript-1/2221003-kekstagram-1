@@ -1,7 +1,8 @@
 import { addPictures } from './thumbnails.js';
 import { uploadPhoto } from './user-form.js';
-import { createSlider } from './effects-filter.js';
+import { getPhotos } from './data.js';
 
-addPictures();
+const photos = getPhotos();
+
+addPictures(photos);
 uploadPhoto();
-createSlider();

@@ -1,6 +1,7 @@
-import { onInput, commentHandler, hashtagsHandler, pristine, error } from './validate.js';
+import { commentHandler, hashtagsHandler, pristine, error } from './validate.js';
 import { changeEffects } from './effects-filter.js';
-import { clickScaleButtons, removeEventScaleButtons } from './scale.js';
+import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
+import { createSlider } from './effects-filter.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -10,25 +11,35 @@ const closeButton = form.querySelector('.img-upload__cancel');
 const comments = form.querySelector('.text__description');
 const hashtags = form.querySelector('.text__hashtags');
 const imageForChange = document.querySelector('.img-upload__preview_img');
+const submitButton = document.querySelector('.img-upload__submit');
+
+const onHashtagsInput = () => {
+  submitButton.disabled = !pristine.validate();
+};
+
+const onCommentsInput = () => {
+  submitButton.disabled = !pristine.validate();
+};
 
 const closePopup = () => {
   imgUpload.classList.add('hidden');
   body.classList.remove('modal-open');
   document.querySelector('.img-upload__effect-level').classList.add('hidden');
   form.reset();
+  removeEventScaleButtons();
+  hashtags.removeEventListener('input', onHashtagsInput);
+  comments.removeEventListener('input', onCommentsInput);
 };
 
 const onButtonEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
     closePopup();
-    removeEventScaleButtons();
     document.removeEventListener('keydown', onButtonEscKeydown);
   }
 };
 
 const onCloseButtonClick = () => {
   closePopup();
-  removeEventScaleButtons();
   document.removeEventListener('keydown', onButtonEscKeydown);
 };
 
@@ -43,7 +54,7 @@ const checkFieldInFocus = (field) => {
 };
 
 
-const onImgUploadFieldchange = () => {
+const onImgUploadFieldChange = () => {
   imageForChange.removeAttribute('class');
   imageForChange.removeAttribute('style');
   imgUpload.classList.remove('hidden');
@@ -53,20 +64,22 @@ const onImgUploadFieldchange = () => {
   checkFieldInFocus(comments);
   checkFieldInFocus(hashtags);
   changeEffects();
-  clickScaleButtons();
+  addEventScaleButtons();
 };
 
 
 const uploadPhoto = () => {
-  file.addEventListener('change', onImgUploadFieldchange);
-  hashtags.addEventListener('input', onInput);
-  comments.addEventListener('input', onInput);
+  file.addEventListener('change', onImgUploadFieldChange);
+  hashtags.addEventListener('input', onHashtagsInput);
+  comments.addEventListener('input', onCommentsInput);
   pristine.addValidator(hashtags, hashtagsHandler, error);
   pristine.addValidator(comments, commentHandler, error);
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     pristine.validate();
   });
+  createSlider();
 };
 
 export { uploadPhoto };
