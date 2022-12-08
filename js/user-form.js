@@ -71,28 +71,33 @@ const onImgUploadFieldChange = () => {
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = 'Сохраняю...';
+  submitButton.textContent = 'Публикую...';
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = 'Сохранить';
+  submitButton.textContent = 'Опубликовать';
 };
 
-const setUserFormSubmit = (onSuccess, onError) => {
+const setUserFormSubmit = () => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
+    pristine.validate();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendData(() => {
-        onSuccess();
-        unblockSubmitButton();
-      }, () => {
-        onError();
-        unblockSubmitButton();
-      }, new FormData(evt.target), closePopup);
+      sendData(
+        () => {
+          showAlert('success');
+          unblockSubmitButton();
+          closePopup();
+        },
+        () => {
+          showAlert('error');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target)
+      );
     }
   });
 };
@@ -104,7 +109,7 @@ const uploadPhoto = () => {
   pristine.addValidator(hashtags, hashtagsHandler, error);
   pristine.addValidator(comments, commentHandler, error);
 
-  setUserFormSubmit(setTimeout(showAlert, 5000), showAlert(true));
+  setUserFormSubmit();
 
   createSlider();
 };

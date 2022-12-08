@@ -12,11 +12,16 @@ const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,
 
 const checkStringLength = (string, length) => string.length <= length;
 
-const showAlert = (isError) => {
-  const alertName = isError ? 'error' : 'success';
-  const alertPopup = document.querySelector(`${alertName}`).content.querySelector('section').cloneNode(true);
+const showAlert = (message) => {
+  const alertPopup = document.querySelector(`#${message}`).content.querySelector('section').cloneNode(true);
   alertPopup.style.zIndex = '100';
-  alertPopup.style.backgroundColor = 'red';
+  alertPopup.style.left = '0';
+  alertPopup.style.top = '0';
+  alertPopup.style.right = '0';
+  alertPopup.style.padding = '10px 3px';
+  alertPopup.style.fontSize = '30px';
+  alertPopup.style.textAlign = 'center';
+  alertPopup.style.color = 'blue';
   document.body.append(alertPopup);
   const button = alertPopup.querySelector('button');
   button.addEventListener('click', () => {
