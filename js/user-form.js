@@ -2,6 +2,8 @@ import { commentHandler, hashtagsHandler, pristine, error } from './validate.js'
 import { changeEffects } from './effects-filter.js';
 import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
+import { sendData } from './api.js';
+import { showAlert } from './utils.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -67,6 +69,33 @@ const onImgUploadFieldChange = () => {
   addEventScaleButtons();
 };
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Сохраняю...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Сохранить';
+};
+
+const setUserFormSubmit = (onSuccess, onError) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(() => {
+        onSuccess();
+        unblockSubmitButton();
+      }, () => {
+        onError();
+        unblockSubmitButton();
+      }, new FormData(evt.target), closePopup);
+    }
+  });
+};
 
 const uploadPhoto = () => {
   file.addEventListener('change', onImgUploadFieldChange);
@@ -75,10 +104,8 @@ const uploadPhoto = () => {
   pristine.addValidator(hashtags, hashtagsHandler, error);
   pristine.addValidator(comments, commentHandler, error);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    pristine.validate();
-  });
+  setUserFormSubmit(setTimeout(showAlert, 5000), showAlert(true));
+
   createSlider();
 };
 
