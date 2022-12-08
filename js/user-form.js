@@ -4,6 +4,7 @@ import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
 import { showAlert } from './utils.js';
+import { photoValide } from './constants.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -88,12 +89,12 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(
         () => {
-          showAlert('success');
+          showAlert(photoValide.SUCCESS);
           unblockSubmitButton();
           closePopup();
         },
         () => {
-          showAlert('error');
+          showAlert(photoValide.ERROR);
           unblockSubmitButton();
         },
         new FormData(evt.target)

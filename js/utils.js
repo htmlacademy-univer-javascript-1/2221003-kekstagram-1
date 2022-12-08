@@ -1,4 +1,4 @@
-const ALERT_SHOW_TIME = 5000;
+import { ALERT_SHOW_TIME } from './constants.js';
 
 const getRandomPositiveInteger = (min, max) => {
   if (min < max) {

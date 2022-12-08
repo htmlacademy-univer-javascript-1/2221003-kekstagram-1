@@ -2,6 +2,7 @@ const DEFAULT_RENDERED_COMMENTS = 5;
 const STEP_ADDED_COMMENTS = 5;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_COUNT_PHOTOS = 25;
+const ALERT_SHOW_TIME = 5000;
 
 const NAMES = ['Вадим', 'Марк', 'Мария', 'Ринат', 'Олег', 'Екатерина', 'Наталья', 'Виктор'];
 const MESSAGES = ['Всё отлично!',
@@ -37,6 +38,11 @@ const Scale = {
   MAX: 100,
   MIN: 25,
   STEP: 25
+};
+
+const photoValide = {
+  SUCCESS: 'success',
+  ERROR: 'error'
 };
 
 const Effects = {
@@ -78,7 +84,7 @@ const ErrorMessage = {
 };
 
 export {
-  MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, CountLike, AvatarNumber, CountComment,
+  MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, ALERT_SHOW_TIME, photoValide, CountLike, AvatarNumber, CountComment,
   DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS, MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage,
   Effects, Scale
 };
