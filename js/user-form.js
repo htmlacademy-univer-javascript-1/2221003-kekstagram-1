@@ -3,7 +3,7 @@ import { changeEffects } from './effects-filter.js';
 import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
-import { showAlert } from './utils.js';
+import { showMessage } from './utils.js';
 import { photoValide } from './constants.js';
 
 const file = document.querySelector('#upload-file');
@@ -89,12 +89,12 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(
         () => {
-          showAlert(photoValide.SUCCESS);
+          showMessage(photoValide.SUCCESS);
           unblockSubmitButton();
           closePopup();
         },
         () => {
-          showAlert(photoValide.ERROR);
+          showMessage(photoValide.ERROR);
           unblockSubmitButton();
         },
         new FormData(evt.target)

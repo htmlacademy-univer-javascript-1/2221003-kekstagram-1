@@ -1,9 +1,7 @@
 import { addPictures } from './thumbnails.js';
 import { uploadPhoto } from './user-form.js';
-//import { getPhotos } from './data.js';
 import { getData } from './api.js';
+import { showAlert } from './utils.js';
 
-//const photos = getPhotos();
-
-getData(addPictures);
+getData(addPictures, showAlert);
 uploadPhoto();

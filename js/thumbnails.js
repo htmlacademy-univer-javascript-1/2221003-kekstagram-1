@@ -11,24 +11,22 @@ const getPictureTemplate = ({ id, url, comments, likes }) => `<a href="#" class=
 let data = [];
 
 const mainContainer = document.querySelector('.js-pictures');
-const createThumbnails = () => mainContainer.insertAdjacentHTML('beforeend', data.map((photo) => getPictureTemplate(photo)).join(''));
+const createThumbnails = (photos) => mainContainer.insertAdjacentHTML('beforeend', photos.map((photo) => getPictureTemplate(photo)).join(''));
 
-const onPictureClick = (evt) => {
-  evt.preventDefault();
+const onMainContainerClick = (evt) => {
   const target = evt.target;
   const parent = target.closest('.js-picture');
-  const id = +parent.dataset.id;
-  const [photo] = data.filter((item) => item.id === id);
-  openBigPicture(photo);
+  if (parent) {
+    const id = parent.dataset.id;
+    const [photo] = data.filter((element) => element.id === +id);
+    openBigPicture(photo);
+  }
 };
 
 const addPictures = (photos) => {
   data = photos.slice();
-  createThumbnails();
-  const pictures = document.querySelectorAll('.js-picture');
-  pictures.forEach((picture) => {
-    picture.addEventListener('click', onPictureClick);
-  });
+  createThumbnails(photos);
+  mainContainer.addEventListener('click', onMainContainerClick);
 };
 
 export { addPictures };

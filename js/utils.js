@@ -12,11 +12,32 @@ const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,
 
 const checkStringLength = (string, length) => string.length <= length;
 
-const showAlert = (message) => {
-  const alertPopup = document.querySelector(`#${message}`).content.querySelector('section').cloneNode(true);
-  const alertTitle = alertPopup.querySelector('h2');
-  const alertButton = alertPopup.querySelector('button');
-  alertPopup.style.zIndex = '100';
+const showAlert = () => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+  alertContainer.textContent = 'Не удалось загрузить фотографии';
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+const showMessage = (message) => {
+  const alertPopup = document.querySelector(`#${message}`).content.querySelector('section');
+  alertPopup.classList.add('js-message');
+  const popup = alertPopup.cloneNode(true);
+  const alertTitle = popup.querySelector('h2');
+  const alertButton = popup.querySelector('button');
+  popup.style.zIndex = '100';
   alertTitle.style.left = '0';
   alertTitle.style.top = '0';
   alertTitle.style.right = '0';
@@ -25,14 +46,23 @@ const showAlert = (message) => {
   alertTitle.style.textAlign = 'center';
   alertTitle.style.color = 'yellow';
   alertButton.style.color = 'red';
-  document.body.append(alertPopup);
-  const button = alertPopup.querySelector('button');
+  document.body.append(popup);
+  const button = popup.querySelector('button');
+  document.addEventListener('keydown', onWindowEscKeydown);
   button.addEventListener('click', () => {
-    alertPopup.remove();
+    popup.remove();
   });
   setTimeout(() => {
-    alertPopup.remove();
+    popup.remove();
   }, ALERT_SHOW_TIME);
 };
 
-export { getRandomPositiveInteger, getRandomArrayElement, checkStringLength, showAlert };
+function onWindowEscKeydown(evt) {
+  const message = document.querySelector('.js-message');
+  if (evt.key === 'Escape') {
+    document.removeEventListener('keydown', onWindowEscKeydown);
+    message.remove();
+  }
+}
+
+export { getRandomPositiveInteger, getRandomArrayElement, checkStringLength, showMessage, showAlert };
