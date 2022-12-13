@@ -1,10 +1,10 @@
-import { commentHandler, hashtagsHandler, pristine, error } from './validate.js';
+import { commentHandler, hashtagsHandler, pristine, throwErrorMessage } from './validate.js';
 import { changeEffects } from './effects-filter.js';
 import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
 import { showMessage } from './utils.js';
-import { photoValide } from './constants.js';
+import { PhotoValide } from './constants.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -30,8 +30,6 @@ const closePopup = () => {
   document.querySelector('.img-upload__effect-level').classList.add('hidden');
   form.reset();
   removeEventScaleButtons();
-  hashtags.removeEventListener('input', onHashtagsInput);
-  comments.removeEventListener('input', onCommentsInput);
 };
 
 const onButtonEscKeydown = (evt) => {
@@ -89,12 +87,12 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(
         () => {
-          showMessage(photoValide.SUCCESS);
+          showMessage(PhotoValide.SUCCESS);
           unblockSubmitButton();
           closePopup();
         },
         () => {
-          showMessage(photoValide.ERROR);
+          showMessage(PhotoValide.ERROR);
           unblockSubmitButton();
         },
         new FormData(evt.target)
@@ -107,8 +105,8 @@ const uploadPhoto = () => {
   file.addEventListener('change', onImgUploadFieldChange);
   hashtags.addEventListener('input', onHashtagsInput);
   comments.addEventListener('input', onCommentsInput);
-  pristine.addValidator(hashtags, hashtagsHandler, error);
-  pristine.addValidator(comments, commentHandler, error);
+  pristine.addValidator(hashtags, hashtagsHandler, throwErrorMessage);
+  pristine.addValidator(comments, commentHandler, throwErrorMessage);
 
   setUserFormSubmit();
 

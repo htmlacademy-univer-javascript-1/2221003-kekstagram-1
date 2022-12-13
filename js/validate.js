@@ -1,7 +1,10 @@
 import { checkStringLength } from './utils.js';
 import { MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage } from './constants.js';
 
+
+const submitButton = document.querySelector('.img-upload__submit');
 const form = document.querySelector('.img-upload__form');
+
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -16,7 +19,7 @@ const makeUniqueHashtags = (hashtag) => {
 
 let errorMessage = '';
 
-const error = () => errorMessage;
+const throwErrorMessage = () => errorMessage;
 
 const hashtagsHandler = (string) => {
   errorMessage = '';
@@ -100,4 +103,8 @@ const commentHandler = (string) => {
   return !isInvalid;
 };
 
-export { commentHandler, hashtagsHandler, pristine, error };
+const onInput = () => {
+  submitButton.disabled = !pristine.validate();
+};
+
+export { onInput, commentHandler, hashtagsHandler, pristine, throwErrorMessage };

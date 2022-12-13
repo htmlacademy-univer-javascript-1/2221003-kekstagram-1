@@ -40,7 +40,7 @@ const Scale = {
   STEP: 25
 };
 
-const photoValide = {
+const PhotoValide = {
   SUCCESS: 'success',
   ERROR: 'error'
 };
@@ -84,7 +84,7 @@ const ErrorMessage = {
 };
 
 export {
-  MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, ALERT_SHOW_TIME, photoValide, CountLike, AvatarNumber, CountComment,
+  MAX_COUNT_PHOTOS, NAMES, MESSAGES, DESCRIPTIONS, ALERT_SHOW_TIME, PhotoValide, CountLike, AvatarNumber, CountComment,
   DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS, MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage,
   Effects, Scale
 };
