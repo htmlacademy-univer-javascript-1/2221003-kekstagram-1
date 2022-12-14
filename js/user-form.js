@@ -4,9 +4,9 @@ import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
 import { showMessage } from './utils.js';
-import { PhotoValide } from './constants.js';
+import { PhotoValide, FILE_TYPES } from './constants.js';
 
-const file = document.querySelector('#upload-file');
+const fileChooser = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 const imgUpload = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
@@ -15,6 +15,7 @@ const comments = form.querySelector('.text__description');
 const hashtags = form.querySelector('.text__hashtags');
 const imageForChange = document.querySelector('.img-upload__preview_img');
 const submitButton = document.querySelector('.img-upload__submit');
+const miniatures = document.querySelectorAll('.effects__preview');
 
 const onHashtagsInput = () => {
   submitButton.disabled = !pristine.validate();
@@ -54,20 +55,6 @@ const checkFieldInFocus = (field) => {
   });
 };
 
-
-const onImgUploadFieldChange = () => {
-  imageForChange.removeAttribute('class');
-  imageForChange.removeAttribute('style');
-  imgUpload.classList.remove('hidden');
-  body.classList.add('modal-open');
-  closeButton.addEventListener('click', onCloseButtonClick);
-  document.addEventListener('keydown', onButtonEscKeydown);
-  checkFieldInFocus(comments);
-  checkFieldInFocus(hashtags);
-  changeEffects();
-  addEventScaleButtons();
-};
-
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикую...';
@@ -101,16 +88,45 @@ const setUserFormSubmit = () => {
   });
 };
 
-const uploadPhoto = () => {
-  file.addEventListener('change', onImgUploadFieldChange);
+const preloadPhoto = () => {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    imageForChange.src = URL.createObjectURL(file);
+    miniatures.forEach((miniature) => {
+      miniature.style.backgroundImage = `url(${imageForChange.src})`;
+    });
+  }
+
+  imageForChange.removeAttribute('class');
+  imageForChange.removeAttribute('style');
+  imgUpload.classList.remove('hidden');
+  closeButton.addEventListener('click', onCloseButtonClick);
+  document.addEventListener('keydown', onButtonEscKeydown);
+
   hashtags.addEventListener('input', onHashtagsInput);
   comments.addEventListener('input', onCommentsInput);
-  pristine.addValidator(hashtags, hashtagsHandler, throwErrorMessage);
-  pristine.addValidator(comments, commentHandler, throwErrorMessage);
-
-  setUserFormSubmit();
 
   createSlider();
+  setUserFormSubmit();
+};
+
+const onImgUploadFieldChange = () => {
+  body.classList.add('modal-open');
+
+  preloadPhoto();
+  checkFieldInFocus(comments);
+  checkFieldInFocus(hashtags);
+  changeEffects();
+  addEventScaleButtons();
+};
+
+const uploadPhoto = () => {
+  fileChooser.addEventListener('change', onImgUploadFieldChange);
+  pristine.addValidator(hashtags, hashtagsHandler, throwErrorMessage);
+  pristine.addValidator(comments, commentHandler, throwErrorMessage);
 };
 
 export { uploadPhoto };

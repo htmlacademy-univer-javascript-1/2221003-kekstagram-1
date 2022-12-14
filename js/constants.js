@@ -2,8 +2,9 @@ const DEFAULT_RENDERED_COMMENTS = 5;
 const STEP_ADDED_COMMENTS = 5;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_COUNT_PHOTOS = 25;
-const ALERT_SHOW_TIME = 5000;
+const ALERT_SHOW_TIME = 3000;
 
+export const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const NAMES = ['Вадим', 'Марк', 'Мария', 'Ринат', 'Олег', 'Екатерина', 'Наталья', 'Виктор'];
 const MESSAGES = ['Всё отлично!',
   'В целом всё неплохо. Но не всё.',

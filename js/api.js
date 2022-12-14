@@ -16,7 +16,9 @@ const getData = (onSuccess, onFail) => {
     .then((data) => {
       onSuccess(data);
     })
-    .catch(() => { onFail(); });
+    .catch(() => {
+      onFail();
+    });
 };
 
 const sendData = (onSuccess, onFail, body) => {

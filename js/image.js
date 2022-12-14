@@ -13,10 +13,8 @@ fileChooser.addEventListener('change', () => {
 
     if (matches) {
         preview.src = URL.createObjectURL(file);
-        for (const miniature of miniatures) {
+        miniatures.forEach((miniature) => {
             miniature.style.backgroundImage = `url(${preview.src})`;
-        }
+        });
     }
 });
-
-export { fileChooser };
