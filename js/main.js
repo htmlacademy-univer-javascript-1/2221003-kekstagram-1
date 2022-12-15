@@ -1,7 +1,7 @@
 import { addPictures } from './thumbnails.js';
 import { uploadPhoto } from './user-form.js';
-import { createSlider } from './effects-filter.js';
+import { getData } from './api.js';
+import { showAlert } from './utils.js';
 
-addPictures();
+getData(addPictures, showAlert);
 uploadPhoto();
-createSlider();

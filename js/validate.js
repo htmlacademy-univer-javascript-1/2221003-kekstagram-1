@@ -19,7 +19,7 @@ const makeUniqueHashtags = (hashtag) => {
 
 let errorMessage = '';
 
-const error = () => errorMessage;
+const throwErrorMessage = () => errorMessage;
 
 const hashtagsHandler = (string) => {
   errorMessage = '';
@@ -107,4 +107,4 @@ const onInput = () => {
   submitButton.disabled = !pristine.validate();
 };
 
-export { onInput, commentHandler, hashtagsHandler, pristine, error };
+export { onInput, commentHandler, hashtagsHandler, pristine, throwErrorMessage };
