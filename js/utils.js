@@ -58,10 +58,8 @@ const showMessage = (message) => {
 };
 
 function onWindowEscKeydown(evt) {
-  const message = document.querySelector('.js-message');
   if (evt.key === 'Escape') {
     document.removeEventListener('keydown', onWindowEscKeydown);
-    message.remove();
   }
 }
 
