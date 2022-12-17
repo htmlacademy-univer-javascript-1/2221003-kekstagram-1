@@ -23,10 +23,17 @@ const onMainContainerClick = (evt) => {
   }
 };
 
-const addPictures = (photos) => {
+const removeThumbnails = () => {
+  const pictures = mainContainer.querySelectorAll('.js-picture');
+  pictures.forEach((picture) => {
+    picture.remove();
+  });
+};
+
+const renderPictures = (photos) => {
   data = photos.slice();
   createThumbnails(photos);
   mainContainer.addEventListener('click', onMainContainerClick);
 };
 
-export { addPictures };
+export { renderPictures, removeThumbnails };

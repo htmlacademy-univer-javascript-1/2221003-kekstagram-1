@@ -1,34 +1,10 @@
 export const DEFAULT_RENDERED_COMMENTS = 5;
 export const STEP_ADDED_COMMENTS = 5;
 export const MAX_COMMENT_LENGTH = 140;
-export const MAX_COUNT_PHOTOS = 25;
 export const ALERT_SHOW_TIME = 3000;
+export const MAX_COUNT_RANDOM_PHOTO = 10;
 
 export const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-export const NAMES = ['Вадим', 'Марк', 'Мария', 'Ринат', 'Олег', 'Екатерина', 'Наталья', 'Виктор'];
-export const MESSAGES = ['Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-export const DESCRIPTIONS = ['Я на пляже', 'Гуляю'];
-
-export const CountLike = {
-  MIN: 15,
-  MAX: 200
-};
-
-export const AvatarNumber = {
-  MIN: 1,
-  MAX: 6
-};
-
-export const CountComment = {
-  MIN: 0,
-  MAX: 23
-};
 
 export const MaxHashtag = {
   LENGTH: 20,
@@ -44,6 +20,12 @@ export const Scale = {
 export const PhotoValide = {
   SUCCESS: 'success',
   ERROR: 'error'
+};
+
+export const Filter = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
 };
 
 export const Effects = {
