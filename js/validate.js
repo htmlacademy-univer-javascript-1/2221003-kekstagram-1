@@ -1,10 +1,7 @@
 import { checkStringLength } from './utils.js';
 import { MAX_COMMENT_LENGTH, MaxHashtag, ErrorMessage } from './constants.js';
 
-
-const submitButton = document.querySelector('.img-upload__submit');
 const form = document.querySelector('.img-upload__form');
-
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -103,8 +100,4 @@ const commentHandler = (string) => {
   return !isInvalid;
 };
 
-const onInput = () => {
-  submitButton.disabled = !pristine.validate();
-};
-
-export { onInput, commentHandler, hashtagsHandler, pristine, throwErrorMessage };
+export { commentHandler, hashtagsHandler, pristine, throwErrorMessage };

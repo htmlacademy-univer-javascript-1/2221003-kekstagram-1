@@ -1,10 +1,9 @@
-import { Effects } from './constants.js';
+import { Effect } from './constants.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const sliderWrapper = document.querySelector('.img-upload__effect-level');
 const imageForChange = document.querySelector('.img-upload__preview_img');
-const uploadEffects = document.querySelector('.img-upload__effects');
 
 const createSlider = () => {
   sliderWrapper.classList.add('hidden');
@@ -29,7 +28,7 @@ const createSlider = () => {
   });
 };
 
-const updateFiltersSlider = (evt) => {
+const onSliderFiltersUpdate = (evt) => {
   const effect = evt.target.value;
   if (effect === 'none') {
     sliderWrapper.classList.add('hidden');
@@ -40,14 +39,12 @@ const updateFiltersSlider = (evt) => {
   sliderWrapper.classList.remove('hidden');
   imageForChange.removeAttribute('class');
   imageForChange.classList.add(`effects__preview--${effect}`);
-  sliderElement.noUiSlider.updateOptions(Effects[effect].options);
+  sliderElement.noUiSlider.updateOptions(Effect[effect].options);
 
   sliderElement.noUiSlider.on('update', () => {
     valueElement.value = sliderElement.noUiSlider.get();
-    imageForChange.style.filter = `${Effects[effect].filter}(${valueElement.value}${Effects[effect].unit})`;
+    imageForChange.style.filter = `${Effect[effect].filter}(${valueElement.value}${Effect[effect].unit})`;
   });
 };
 
-const changeEffects = () => uploadEffects.addEventListener('change', updateFiltersSlider);
-
-export { createSlider, changeEffects };
+export { createSlider, onSliderFiltersUpdate };
