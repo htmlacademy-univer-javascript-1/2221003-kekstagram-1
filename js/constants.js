@@ -28,7 +28,7 @@ export const Filter = {
   DISCUSSED: 'filter-discussed'
 };
 
-export const Effects = {
+export const Effect = {
   'original': {
     name: 'original', filter: '', unit: '',
     options: { range: { min: 0, max: 100 }, step: 1, start: 100 },
@@ -59,7 +59,7 @@ export const ErrorMessage = {
   HASH_SPACE: 'Хэш-теги разделяются пробелами',
   STARTS_WITH_HASH: 'Хэш-тег начинается с символа #',
   REPEAT_ERROR: 'Хэш-теги не должны повторяться',
-  HASHTAG_MAX_LENTH: `Максимальная длина одного хэш-тега ${MaxHashtag.LENGTH} символов, включая #`,
+  HASHTAG_MAX_LENGTH: `Максимальная длина одного хэш-тега ${MaxHashtag.LENGTH} символов, включая #`,
   HASHTAG_MAX_COUNT: `Нельзя указать больше ${MaxHashtag.COUNT} хэш-тегов`,
   UBNORMAL_SYMBOLS: 'Хэш-тег содержит недопустимые символы',
   MAX_COMM_LENGTH: `Максимальная длина комментария - ${MAX_COMMENT_LENGTH} символов.`,

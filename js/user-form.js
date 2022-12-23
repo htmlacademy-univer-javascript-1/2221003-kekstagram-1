@@ -1,9 +1,9 @@
 import { commentHandler, hashtagsHandler, pristine, throwErrorMessage } from './validate.js';
-import { changeEffects } from './effects-filter.js';
+import { updateFiltersSlider } from './effects-filter.js';
 import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
-import { showMessage } from './utils.js';
+import { showMessage } from './message.js';
 import { PhotoValide, FILE_TYPES } from './constants.js';
 
 const fileChooser = document.querySelector('.img-upload__input');
@@ -16,6 +16,7 @@ const hashtags = form.querySelector('.text__hashtags');
 const imageForChange = document.querySelector('.img-upload__preview_img');
 const submitButton = document.querySelector('.img-upload__submit');
 const miniatures = document.querySelectorAll('.effects__preview');
+const uploadEffects = document.querySelector('.img-upload__effects');
 
 const onHashtagsInput = () => {
   submitButton.disabled = !pristine.validate();
@@ -81,6 +82,7 @@ const setUserFormSubmit = () => {
         () => {
           showMessage(PhotoValide.ERROR);
           unblockSubmitButton();
+          closePopup();
         },
         new FormData(evt.target)
       );
@@ -119,7 +121,7 @@ const onImgUploadFieldChange = () => {
   preloadPhoto();
   checkFieldInFocus(comments);
   checkFieldInFocus(hashtags);
-  changeEffects();
+  uploadEffects.addEventListener('change', updateFiltersSlider);
   addEventScaleButtons();
 };
 
