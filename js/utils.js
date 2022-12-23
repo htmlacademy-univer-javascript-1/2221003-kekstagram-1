@@ -35,25 +35,13 @@ const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const discussArray = (firstPic, secondPic) => secondPic.comments.length - firstPic.comments.length;
 
-function debounce(callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
-function throttle(callback, delayBetweenFrames = 500) {
-  let lastTime = 0;
-
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-}
-
-export { getRandomPositiveInteger, getRandomArrayElement, checkStringLength, showAlert, shuffleArray, discussArray, debounce, throttle };
+export { getRandomPositiveInteger, getRandomArrayElement, checkStringLength, showAlert, shuffleArray, discussArray, debounce };

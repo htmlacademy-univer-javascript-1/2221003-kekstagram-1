@@ -1,10 +1,11 @@
 import { commentHandler, hashtagsHandler, pristine, throwErrorMessage } from './validate.js';
-import { updateFiltersSlider } from './effects-filter.js';
+import { onSliderFiltersUpdate } from './effects-filter.js';
 import { addEventScaleButtons, removeEventScaleButtons } from './scale.js';
 import { createSlider } from './effects-filter.js';
 import { sendData } from './api.js';
 import { showMessage } from './message.js';
 import { PhotoValide, FILE_TYPES } from './constants.js';
+import { showAlert } from './utils.js';
 
 const fileChooser = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
@@ -17,6 +18,7 @@ const imageForChange = document.querySelector('.img-upload__preview_img');
 const submitButton = document.querySelector('.img-upload__submit');
 const miniatures = document.querySelectorAll('.effects__preview');
 const uploadEffects = document.querySelector('.img-upload__effects');
+
 
 const onHashtagsInput = () => {
   submitButton.disabled = !pristine.validate();
@@ -102,6 +104,11 @@ const preloadPhoto = () => {
     });
   }
 
+  else {
+    showAlert();
+    return;
+  }
+
   imageForChange.removeAttribute('class');
   imageForChange.removeAttribute('style');
   imgUpload.classList.remove('hidden');
@@ -121,7 +128,7 @@ const onImgUploadFieldChange = () => {
   preloadPhoto();
   checkFieldInFocus(comments);
   checkFieldInFocus(hashtags);
-  uploadEffects.addEventListener('change', updateFiltersSlider);
+  uploadEffects.addEventListener('change', onSliderFiltersUpdate);
   addEventScaleButtons();
 };
 

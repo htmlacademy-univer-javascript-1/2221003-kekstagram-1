@@ -28,7 +28,7 @@ const createSlider = () => {
   });
 };
 
-const updateFiltersSlider = (evt) => {
+const onSliderFiltersUpdate = (evt) => {
   const effect = evt.target.value;
   if (effect === 'none') {
     sliderWrapper.classList.add('hidden');
@@ -47,4 +47,4 @@ const updateFiltersSlider = (evt) => {
   });
 };
 
-export { createSlider, updateFiltersSlider };
+export { createSlider, onSliderFiltersUpdate };
